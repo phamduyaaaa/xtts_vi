@@ -15,13 +15,13 @@ repetition_penalty = 10.0
 top_k = 10
 top_p = 0.5
 speed=0.9
-temperature=0.7
+temperature=0.8
 num_beams=1
 MODEL_DIR = "model/"
 config_file = f"{MODEL_DIR}config.json"
 model_weights = f"{MODEL_DIR}model.pth"
 vocab_file = f"{MODEL_DIR}vocab.json"
-speaker_audio_file = f"{MODEL_DIR}vi_man.wav"
+speaker_audio_file = f"{MODEL_DIR}begai_lop_4.wav"
 
 # Kiểm tra thiết bị (GPU được ưu tiên để xử lý nhanh hơn)/home/ducduy/Downloads/final.wav
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
@@ -89,15 +89,16 @@ def generate_full_audio(model, text, language="vi"):
 if __name__ == "__main__":
     input_text = (
         '''
- Every day, try to spend at least 15 minutes practicing. Sự kiên trì chính là chìa khóa dẫn đến thành công. Consistency is the key to success. Đừng sợ mắc lỗi, vì đó là cách duy nhất để chúng ta tiến bộ hơn. 
+Last weekend, I visited my cousin in the countryside. The air felt incredibly fresh, and everything seemed calm and peaceful. We spent the afternoon riding bicycles along a narrow path surrounded by green fields. Later, we sat by the river and talked about our future dreams and ambitions. Before going home, I realized how refreshing it is to disconnect from busy city life and simply appreciate quiet moments.
         '''
     )
     
-    output_filename = f"songngu_final_{length_penalty}_{repetition_penalty}_{top_k}_{top_p}_{speed}_{temperature}_{num_beams}.wav"
+    #output_filename = f"songngu_begai_lop_4{length_penalty}_{repetition_penalty}_{top_k}_{top_p}_{speed}_{temperature}_{num_beams}.wav"
+    output_filename = f"check7_en.wav"
     
     try:
         # Tạo âm thanh
-        final_wav = generate_full_audio(XTTS_MODEL, input_text, language="vi")
+        final_wav = generate_full_audio(XTTS_MODEL, input_text, language="en")
         
         # Lưu file bằng torchaudio (XTTS mặc định sample rate là 24000)
         torchaudio.save(output_filename, final_wav, sample_rate=24000)
